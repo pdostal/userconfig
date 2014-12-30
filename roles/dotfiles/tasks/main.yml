@@ -1,3 +1,11 @@
 - name: Fetch repository
   git: repo=https://github.com/pdostal/dotfiles.git dest=~/dotfiles
   notify: Apply files
+- name: Paste ~/.profile
+  template:
+    src=profile.{{ ansible_hostname }}
+    dest=~/.profile
+    owner={{ user }}
+    group={{ user }}
+    mode=0774
+  notify: Test connection

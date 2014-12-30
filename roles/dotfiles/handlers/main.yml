@@ -1,2 +1,4 @@
 - name: Apply files
   shell: cd ~/dotfiles && ./apply.sh
+- name: Test connection
+  ping:
