@@ -1,3 +1,5 @@
+- name: Ensure ~/.ssh exists
+  file: path=~/.ssh state=directory mode=700
 - name: Paste authorized_keys
   template:
     src=authorized_keys.{{ ansible_hostname }}
