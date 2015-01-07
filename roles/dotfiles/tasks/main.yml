@@ -6,6 +6,5 @@
     src=profile.{{ inventory_hostname }}
     dest=~/.profile
     owner={{ user }}
-    group={{ user }}
     mode=0774
   notify: Test connection
