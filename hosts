@@ -1,4 +1,5 @@
 [myServers]
-vps
+local
 shark
+vps
 pi
