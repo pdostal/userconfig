@@ -1,5 +1,6 @@
 - name: Fetch repository
   git: repo=https://github.com/pdostal/dotfiles.git dest=~/dotfiles
+  when: inventory_hostname != 'local'
   notify: Apply files
 - name: Paste ~/.profile
   template:
