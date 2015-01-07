@@ -3,7 +3,7 @@
   notify: Apply files
 - name: Paste ~/.profile
   template:
-    src=profile.{{ ansible_hostname }}
+    src=profile.{{ inventory_hostname }}
     dest=~/.profile
     owner={{ user }}
     group={{ user }}
