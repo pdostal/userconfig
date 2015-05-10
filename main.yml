@@ -21,7 +21,7 @@
   - name: Clone oh-my-git
     git: repo=git@github.com:arialdomartini/oh-my-git.git dest=~/external/oh-my-git
   - name: Include oh-my-git
-    lineinfile: dest=~/.profile regexp=~/dotfiles/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
+    lineinfile: dest=~/.profile regexp=~/external/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
     notify: Test connection
     when: inventory_hostname == 'local'
 
