@@ -5,17 +5,8 @@
     ping:
 
   tasks:
-  - name: Set repo fact {local}
-    when: inventory_hostname == 'local'
-    set_fact:
-      repo: 'git@github.com:pdostal/dotfiles.git'
-  - name: Set repo fact {others}
-    when: inventory_hostname != 'local'
-    set_fact:
-      repo: 'https://github.com/pdostal/dotfiles.git'
-
-  - name: Fetch repository
-    git: repo={{ repo }} dest=~/dotfiles accept_hostkey=yes
+  - name: Clone repository
+    git: repo=git@github.com:pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
   - name: Apply files
     shell: cd ~/dotfiles && ./apply.sh
   - name: Ensure .profile exists
@@ -23,8 +14,14 @@
   - name: Include .bashrc
     lineinfile: dest=~/.profile regexp=~/.bashrc line='source ~/.bashrc'
     notify: Test connection
+
+  - name: Clone github gitignore
+    git: repo=git@github.com:github/gitignore.git dest=~/external/github_gitignore
+
+  - name: Clone oh-my-git
+    git: repo=git@github.com:arialdomartini/oh-my-git.git dest=~/external/oh-my-git
   - name: Include oh-my-git
-    lineinfile: dest=~/.profile regexp=~/dotfiles/oh-my-git/ line='source ~/dotfiles/oh-my-git/prompt.sh'
+    lineinfile: dest=~/.profile regexp=~/dotfiles/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
     notify: Test connection
     when: inventory_hostname == 'local'
 
