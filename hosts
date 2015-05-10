@@ -2,4 +2,4 @@
 cucumber
 rhubarb
 sorrel
-local
+local     ansible_connection=local
