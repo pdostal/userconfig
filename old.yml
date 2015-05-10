@@ -1,5 +1,0 @@
-- name: User
-  hosts: all
-  roles:
-  - { role: SSH, tags: ssh }
-  - { role: DOTFILES, tags: dotfiles }
