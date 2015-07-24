@@ -30,3 +30,10 @@
   - name: Paste my key
     lineinfile: dest=~/.ssh/authorized_keys regexp='pavel@laptop.pdostal.cz' line='ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNqDvUZvnRqJ4ZLz/wjiCdqG/iTZBCxo9NjmxEbQR8sNPWnm39dw/10xSz2cC7MmkOOeACEr0ihpZfS48Hm8158= pavel@laptop.pdostal.cz'
     notify: Test connection
+
+  - name: Disable installing gem documentation
+    lineinfile: >
+      dest=~/.gemfile
+      create=yes
+      regexp=--no-document
+      line='gem: --no-document'
