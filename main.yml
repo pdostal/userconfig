@@ -8,11 +8,15 @@
   - name: Clone repository
     git: repo=git@github.com:pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
   - name: Apply files
-    shell: cd ~/dotfiles && ./apply.sh
+    shell: cd ~/dotfiles && ./apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
   - name: Ensure .profile exists
     file: path=~/.profile state=touch mode=700
   - name: Include .bashrc
-    lineinfile: dest=~/.profile regexp=~/.bashrc line='source ~/.bashrc'
+    lineinfile: >
+      dest=~/.profile
+      create=yes
+      regexp=~/.bashrc
+      line='source ~/.bashrc'
     notify: Test connection
 
   - name: Clone github gitignore
@@ -21,7 +25,11 @@
   - name: Clone oh-my-git
     git: repo=git@github.com:arialdomartini/oh-my-git.git dest=~/external/oh-my-git
   - name: Include oh-my-git
-    lineinfile: dest=~/.profile regexp=~/external/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
+    lineinfile: >
+      dest=~/.profile
+      create=yes
+      regexp=~/external/oh-my-git/
+      line='source ~/external/oh-my-git/prompt.sh'
     notify: Test connection
     when: inventory_hostname == 'local'
 
