@@ -8,16 +8,11 @@
   - name: Clone repository
     git: repo=git@github.com:pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
   - name: Apply files
-    shell: cd ~/dotfiles && ./apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
+    shell: ./apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
   - name: Ensure .profile exists
     file: path=~/.profile state=touch mode=700
   - name: Include .bashrc
-    lineinfile: >
-      dest=~/.profile
-      create=yes
-      regexp=~/.bashrc
-      line='source ~/.bashrc'
-    notify: Test connection
+    lineinfile: dest=~/.profile create=yes regexp=~/.bashrc line='source ~/.bashrc' notify: Test connection
 
   - name: Clone github gitignore
     git: repo=git@github.com:github/gitignore.git dest=~/external/github_gitignore
@@ -25,11 +20,7 @@
   - name: Clone oh-my-git
     git: repo=git@github.com:arialdomartini/oh-my-git.git dest=~/external/oh-my-git
   - name: Include oh-my-git
-    lineinfile: >
-      dest=~/.profile
-      create=yes
-      regexp=~/external/oh-my-git/
-      line='source ~/external/oh-my-git/prompt.sh'
+    lineinfile: dest=~/.profile create=yes regexp=~/external/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
     notify: Test connection
     when: inventory_hostname == 'local'
 
@@ -42,9 +33,3 @@
     lineinfile: dest=~/.ssh/authorized_keys regexp='yubikey@pdostal.cz' line='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxs3F+tCvW9KH7FB4L+9MkP7jMfMrECkjE7+oVGgjPIZfmyg7dYBL5JWQnXuEe2mvYpB1Z1FaeaGji9g9GGKh3W/BOHnxJv+RNTKFSwQfFP6m5c2cLYl8lvRGpqCarZEfwfdNWDw6Goi+uGwKvZx4Zzs5cwoUfB832b23udSIqXuSCRpa9pTBvSSQySYxxQSIrM5phZy6i1AThhNjN1GLXiNmyacAfprZjLg43U7oi/eN6xqQU/sZLEarowTE17F82oU8Yi6eTWAb7J0282r5RP5TESwjb7qePOexCRY9qiwH5rFE/dTRLDTJfvWIpu5nYK85xh2AZuxpPF1x99h5t yubikey@pdostal.cz'
     notify: Test connection
 
-  - name: Disable installing gem documentation
-    lineinfile: >
-      dest=~/.gemfile
-      create=yes
-      regexp=--no-document
-      line='gem: --no-document'
