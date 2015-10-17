@@ -1,5 +1,6 @@
-[myServers]
+[all]
+shell.sh
 cucumber
 rhubarb
 sorrel
-local     ansible_connection=local
+local  ansible_connection=local
