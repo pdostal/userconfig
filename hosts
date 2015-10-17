@@ -1,6 +1,8 @@
-[all]
+[ssh]
 shell.sh
 cucumber
 rhubarb
 sorrel
+
+[local]
 local  ansible_connection=local

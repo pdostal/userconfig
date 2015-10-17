@@ -5,10 +5,17 @@
     ping:
 
   tasks:
+  - set_fact:
+      github_repo: 'git@github.com:'
+    when: inventory_hostname in groups['local']
+  - set_fact:
+      github_repo: 'https://github.com/'
+    when: inventory_hostname in groups['ssh']
+
   - name: Clone repository
-    git: repo=git@github.com:pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
+    git: repo={{ github_repo }}pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
   - name: Apply files
-    shell: ./apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
+    shell: ~/dotfiles/apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
   - name: Ensure .profile exists
     file: path=~/.profile state=touch mode=700
   - name: Include .bashrc
@@ -16,10 +23,10 @@
     notify: Test connection
 
   - name: Clone github gitignore
-    git: repo=git@github.com:github/gitignore.git dest=~/external/github_gitignore
+    git: repo={{ github_repo }}github/gitignore.git dest=~/external/github_gitignore
 
   - name: Clone oh-my-git
-    git: repo=git@github.com:arialdomartini/oh-my-git.git dest=~/external/oh-my-git
+    git: repo={{ github_repo }}arialdomartini/oh-my-git.git dest=~/external/oh-my-git
   - name: Include oh-my-git
     lineinfile: dest=~/.profile create=yes regexp=~/external/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
     notify: Test connection
