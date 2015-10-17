@@ -12,7 +12,8 @@
   - name: Ensure .profile exists
     file: path=~/.profile state=touch mode=700
   - name: Include .bashrc
-    lineinfile: dest=~/.profile create=yes regexp=~/.bashrc line='source ~/.bashrc' notify: Test connection
+    lineinfile: dest=~/.profile create=yes regexp=~/.bashrc line='source ~/.bashrc'
+    notify: Test connection
 
   - name: Clone github gitignore
     git: repo=git@github.com:github/gitignore.git dest=~/external/github_gitignore
