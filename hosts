@@ -3,6 +3,7 @@ shell.sh
 cucumber
 rhubarb
 sorrel
+grape
 
 [local]
 local  ansible_connection=local
