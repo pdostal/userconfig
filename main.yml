@@ -25,13 +25,6 @@
   - name: Clone github gitignore
     git: repo={{ github_repo }}github/gitignore.git dest=~/external/github_gitignore
 
-  - name: Clone oh-my-git
-    git: repo={{ github_repo }}arialdomartini/oh-my-git.git dest=~/external/oh-my-git
-  - name: Include oh-my-git
-    lineinfile: dest=~/.profile create=yes regexp=~/external/oh-my-git/ line='source ~/external/oh-my-git/prompt.sh'
-    notify: Test connection
-    when: inventory_hostname == 'local'
-
   - name: Ensure ~/.ssh exists
     file: path=~/.ssh state=directory mode=700
   - name: Paste rsa key
