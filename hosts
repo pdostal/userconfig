@@ -5,6 +5,7 @@ cucumber
 rhubarb
 sorrel
 grape
+pi
 
 [local]
 local  ansible_connection=local
