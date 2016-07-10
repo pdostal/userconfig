@@ -4,6 +4,7 @@ shell.sh
 cucumber
 sorrel
 grape
+peas
 pi
 
 [local]
