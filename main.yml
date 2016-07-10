@@ -22,9 +22,6 @@
     lineinfile: dest=~/.profile create=yes regexp=~/.bashrc line='source ~/.bashrc'
     notify: Test connection
 
-  - name: Clone github gitignore
-    git: repo={{ github_repo }}github/gitignore.git dest=~/external/github_gitignore
-
   - name: Ensure ~/.ssh exists
     file: path=~/.ssh state=directory mode=700
   - name: Paste primar rsa key
