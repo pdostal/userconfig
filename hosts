@@ -1,6 +1,9 @@
 [ssh]
 jsindelar
 shell.sh
+observium-ng.sh
+syslog-nms.sh
+ftp.sh
 cucumber
 sorrel
 grape
