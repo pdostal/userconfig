@@ -5,6 +5,7 @@ observium-ng.sh
 syslog-nms.sh
 ftp.sh
 cucumber
+coconut ansible_python_interpreter=/usr/local/bin/python
 sorrel
 grape
 peas
