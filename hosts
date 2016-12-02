@@ -4,6 +4,7 @@ shell.sh
 observium-ng.sh
 syslog-nms.sh
 ftp.sh
+habanero
 cucumber
 coconut
 sorrel
