@@ -1,9 +1,5 @@
 - name: User
   hosts: all
-  handlers:
-  - name: Test connection
-    ping:
-
   tasks:
   - set_fact:
       github_repo: 'git@github.com:'
@@ -20,11 +16,9 @@
     file: path=~/.profile state=touch mode=700
   - name: Include .bashrc
     lineinfile: dest=~/.profile create=yes regexp=~/.bashrc line='source ~/.bashrc'
-    notify: Test connection
 
   - name: Ensure ~/.ssh exists
     file: path=~/.ssh state=directory mode=700
   - name: Paste primar rsa key
     authorized_key: user={{ ansible_user_id }} key="{{ lookup('file', '/Users/pavel/.ssh/id_rsa.pub') }}"
-    notify: Test connection
 

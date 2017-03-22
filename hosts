@@ -4,12 +4,10 @@ shell.sh
 observium-ng.sh
 syslog-nms.sh
 ftp.sh
-habanero
-cucumber
-coconut
-grape
-peas
+dump
+huis
 pi
 
 [local]
 local  ansible_connection=local
+
