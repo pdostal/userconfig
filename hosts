@@ -4,9 +4,12 @@ shell.sh
 observium-ng.sh
 syslog-nms.sh
 ftp.sh
+git.sh
+bosluk.sh
 dump
 huis
-pi
+uzel
+hub
 
 [local]
 local  ansible_connection=local
