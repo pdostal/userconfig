@@ -1,8 +1,9 @@
 - name: User
   hosts: all
+
   tasks:
   - set_fact:
-      github_repo: 'git@github.com:'
+      github_repo: 'ssh://git@github.com/'
     when: inventory_hostname in groups['local']
   - set_fact:
       github_repo: 'https://github.com/'
@@ -15,13 +16,15 @@
     git: repo={{ github_repo }}pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
   - name: Apply dotfiles
     shell: ~/dotfiles/apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
+
   - name: Ensure .profile exists
     file: path=~/.profile state=touch mode=700
+    when: inventory_hostname in groups['ssh']
   - name: Include .bashrc
     lineinfile: dest=~/.profile create=yes regexp=~/.bashrc line='source ~/.bashrc'
+    when: inventory_hostname in groups['ssh']
 
   - name: Ensure ~/.ssh exists
     file: path=~/.ssh state=directory mode=700
   - name: Paste primar rsa key
     authorized_key: user={{ ansible_user_id }} key="{{ lookup('file', '/Users/pavel/.ssh/id_rsa.pub') }}"
-

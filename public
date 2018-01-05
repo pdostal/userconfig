@@ -1,0 +1,9 @@
+[ssh]
+dump
+huis
+
+ftp.sh
+git.sh
+
+[local]
+localhost  ansible_connection=local
