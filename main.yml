@@ -10,10 +10,10 @@
     when: inventory_hostname in groups['ssh']
 
   - name: clone bin
-    git: repo={{ github_repo }}pdostal/homeBIN.git dest=~/bin accept_hostkey=yes
+    git: repo={{ github_repo }}pdostal/homeBIN.git dest=~/bin accept_hostkey=yes force=yes
 
   - name: Clone dotfiles
-    git: repo={{ github_repo }}pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes
+    git: repo={{ github_repo }}pdostal/dotfiles.git dest=~/dotfiles accept_hostkey=yes force=yes
   - name: Apply dotfiles
     shell: ~/dotfiles/apply.sh {{ ansible_user_dir }} {{ ansible_user_dir }}/dotfiles
 
