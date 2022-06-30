@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: userconfig
+  namespace: pdostal
+  author: Pavel Dostál
+  description: Configurable my user account
+  company: pdostal
+  license: license MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: opensuse
+  galaxy_tags:
+    - userconfig
+dependencies: []

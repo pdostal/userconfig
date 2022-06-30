@@ -1,0 +1,12 @@
+FROM docker.io/debian:bullseye
+
+# Install systemd, and development tools, clear cache and clean system
+RUN apt-get update && apt-get install -y systemd systemd-sysv python3 curl git && \
+  rm -rf /var/cache/* \
+  && systemctl mask -- dev-hugepages.mount sys-fs-fuse-connections.mount && \
+  rm -f /etc/machine-id /var/lib/dbus/machine-id
+
+STOPSIGNAL SIGRTMIN+3
+
+# Start container with systemd
+ENTRYPOINT ["/sbin/init"]

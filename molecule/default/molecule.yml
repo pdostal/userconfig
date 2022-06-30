@@ -1,0 +1,45 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: leap154
+    image: registry.opensuse.org/opensuse/leap:15.4
+    dockerfile: Dockerfile.leap154
+    command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /run
+      - /tmp
+  - name: debian11
+    image: docker.io/debian:bullseye
+    dockerfile: Dockerfile.debian11
+    command: ${MOLECULE_DOCKER_COMMAND:-"/sbin/init"}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    tmpfs:
+      - /run
+      - /tmp
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      hosts: inventory
+scenario:
+  name: default
+  test_sequence:
+    - destroy
+    - create
+    - converge
+    - lint
+    - verify
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .

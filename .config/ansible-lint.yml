@@ -1,0 +1,6 @@
+warn_list:
+  - command-instead-of-shell
+  - experimental
+  - git-latest
+  - no-changed-when
+  - yaml
